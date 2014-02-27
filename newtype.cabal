@@ -20,3 +20,9 @@ Library
   -- Other-modules:       
   -- Build-tools:         
   Ghc-options: -Wall
+
+source-repository head
+  type: git
+  location: https://github.com/jcristovao/newtype-generics
+
+
