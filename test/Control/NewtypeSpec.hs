@@ -1,6 +1,6 @@
 {-# LANGUAGE NoMonomorphismRestriction #-}
 {-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE RebindableSyntax #-}
+{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TypeFamilies #-}
 
@@ -9,10 +9,14 @@ module Control.NewtypeSpec where
 import Prelude
 
 import Data.Monoid
-import Data.String
 import Control.Newtype
+import GHC.Generics
 
 import Test.Hspec
+
+newtype TestNewType = TestNewType Int deriving (Eq,Show,Generic)
+
+instance Newtype TestNewType
 
 {-# ANN spec ("HLint: ignore Redundant do"::String) #-}
 spec :: Spec
@@ -21,14 +25,15 @@ spec = describe "Newtype test" $ do
       five = 5 :: Int
       noth = Nothing  :: Maybe String
   it "pack" $ do
-    (pack True :: All) `shouldBe` All True
-    (pack True :: Any) `shouldBe` Any True
+    (pack True :: All)              `shouldBe` All True
+    (pack True :: Any)              `shouldBe` Any True
     (pack (Just five) :: First Int) `shouldBe` First (Just 5)
 
   it "unpack" $ do
-    unpack (Any False) `shouldBe` False
-    unpack (First (Just five)) `shouldBe` Just five
-    unpack (Last noth) `shouldBe` Nothing
+    unpack (Any False)          `shouldBe` False
+    unpack (First (Just five))  `shouldBe` Just five
+    unpack (Last noth)          `shouldBe` Nothing
+    unpack (TestNewType five)   `shouldBe` five
 
   it "op" $ do
     op All (All True)  `shouldBe` True
