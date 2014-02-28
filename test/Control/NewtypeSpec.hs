@@ -1,0 +1,47 @@
+{-# LANGUAGE NoMonomorphismRestriction #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE RebindableSyntax #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeFamilies #-}
+
+module Control.NewtypeSpec where
+
+import Prelude
+
+import Data.Monoid
+import Data.String
+import Control.Newtype
+
+import Test.Hspec
+
+{-# ANN spec ("HLint: ignore Redundant do"::String) #-}
+spec :: Spec
+spec = describe "Newtype test" $ do
+  let four = 4 :: Int
+      five = 5 :: Int
+      noth = Nothing  :: Maybe String
+  it "pack" $ do
+    (pack True :: All) `shouldBe` All True
+    (pack True :: Any) `shouldBe` Any True
+    (pack (Just five) :: First Int) `shouldBe` First (Just 5)
+
+  it "unpack" $ do
+    unpack (Any False) `shouldBe` False
+    unpack (First (Just five)) `shouldBe` Just five
+    unpack (Last noth) `shouldBe` Nothing
+
+  it "op" $ do
+    op All (All True)  `shouldBe` True
+    op Any (Any False) `shouldBe` False
+    op Sum (Sum five)  `shouldBe` five
+
+  it "under" $ do
+    let sumLess (Sum x) = Sum (x - 1)
+        firstN  (_)     = First Nothing
+    under Sum   sumLess five        `shouldBe` four
+    under First firstN  (Just five) `shouldBe` (Nothing :: Maybe Int)
+
+  it "over" $ do
+    over Sum     (+1) (Sum     four) `shouldBe` Sum five
+    over Product (+1) (Product four) `shouldBe` Product five
+
