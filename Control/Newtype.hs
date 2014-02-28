@@ -4,7 +4,6 @@
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE StandaloneDeriving         #-}
 {-# LANGUAGE UndecidableInstances       #-}
-{-# OPTIONS_GHC -fno-warn-orphans       #-}
 {- |
 The 'Newtype' typeclass and related functions: 'op', 'ala', 'ala'', 'under'. Primarly pulled from Conor McBride's Epigram work. Some examples:
 
