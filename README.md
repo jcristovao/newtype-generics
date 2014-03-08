@@ -30,8 +30,11 @@ This could of course be eased with the addition of generics for version 0.3:
 ```
 {-# LANGUAGE DeriveGeneric              #-}
 
+import GHC.Generics
+
 (...)
 newtype Example = Example Int {deriving Generic)
+
 instance Newtype Example
 ```
 
