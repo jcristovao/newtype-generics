@@ -5,7 +5,8 @@
 {-# LANGUAGE StandaloneDeriving         #-}
 {-# LANGUAGE UndecidableInstances       #-}
 {- |
-The 'Newtype' typeclass and related functions: 'op', 'ala', 'ala'', 'under'. Primarly pulled from Conor McBride's Epigram work. Some examples:
+The 'Newtype' typeclass and related functions: 'op', 'ala', 'ala'', 'under'.
+Primarly pulled from Conor McBride's Epigram work. Some examples:
 
 @ala Sum foldMap [1,2,3,4] -- foldMaps the list ala the Sum newtype. This results in 10.@
 
@@ -15,11 +16,35 @@ The 'Newtype' typeclass and related functions: 'op', 'ala', 'ala'', 'under'. Pri
 
 NB: 'Data.Foldable.foldMap' is a generalized @mconcatMap@ which is a generalized @concatMap@.
 
-This package includes 'Newtype' instances for all the (non-GHC\/foreign) newtypes in base (as seen in the examples).
-However, there are neat things you can do with this with /any/ newtype and you should definitely define your own 'Newtype' instances for the power of this library.
+This package includes 'Newtype' instances for all the (non-GHC\/foreign)
+newtypes in base (as seen in the examples).
+However, there are neat things you can do with this with
+/any/ newtype and you should definitely define your own 'Newtype'
+instances for the power of this library.
 For example, see @ala Cont traverse@, with the proper 'Newtype' instance for Cont.
+You can easily define new instances for your newtypes with the help of GHC.Generics
+
+ > {—# LANGUAGE DeriveGeneric #—}
+ > import GHC.Generics
+ >
+ > (...)
+ > newtype Example = Example Int {deriving Generic)
+ >
+ > instance Newtype Example
+ >
+
+This avoids the use of Template Haskell (TH) to get new instances.
 -}
-module Control.Newtype ( Newtype(..), op, ala, ala', under, over, underF, overF ) where
+module Control.Newtype
+  ( Newtype(..)
+  , op
+  , ala
+  , ala'
+  , under
+  , over
+  , underF
+  , overF
+  ) where
 
 import Data.Monoid
 import Control.Applicative
@@ -27,9 +52,11 @@ import Control.Arrow
 import GHC.Generics
 {-import Generics.Deriving-}
 
--- | Given a newtype @n@, we will always have the same unwrapped type @o@, meaning we can represent this with a fundep @n -> o@.
+-- | Given a newtype @n@, we will always have the same unwrapped type @o@,
+-- meaning we can represent this with a fundep @n -> o@.
 --
--- Any instance of this class just needs to let @pack@ equal to the newtype's constructor, and let @unpack@ destruct the newtype with pattern matching.
+-- Any instance of this class just needs to let @pack@ equal to the newtype's
+-- constructor, and let @unpack@ destruct the newtype with pattern matching.
 {-class Newtype n o | n -> o where-}
   {-pack :: o -> n-}
   {-unpack :: n -> o-}
