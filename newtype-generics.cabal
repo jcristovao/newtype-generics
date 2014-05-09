@@ -1,5 +1,5 @@
 Name:                newtype-generics
-Version:             0.4
+Version:             0.4.0.1
 Synopsis:            A typeclass and set of functions for working with newtypes, with generics support.
 Description:         Per Conor McBride, the Newtype typeclass represents the packing and unpacking of a newtype,
                      and allows you to operatate under that newtype with functions such as ala.
@@ -7,7 +7,7 @@ Description:         Per Conor McBride, the Newtype typeclass represents the pac
                      for the original newtype package, and a better alternative to newtype-th.
 License:             BSD3
 License-file:        LICENSE
-Author:              Darius Jahandarie, Conor McBride, João Cristovao
+Author:              Darius Jahandarie, Conor McBride, João Cristovão
 Maintainer:          João Cristóvão <jmacristovao@gmail.com>
 -- Copyright:           
 Category:            Control
@@ -17,9 +17,7 @@ Cabal-version:       >=1.10
 
 Library
   Exposed-modules:     Control.Newtype
-  Build-depends:       base >= 3.0 && < 5
-  -- Other-modules:       
-  -- Build-tools:         
+  Build-depends:       base >= 4.5 && < 4.8
   Ghc-options: -Wall
   default-language:   Haskell2010
 
@@ -31,9 +29,9 @@ test-suite test
   type:               exitcode-stdio-1.0
   main-is:            main.hs
   hs-source-dirs:     test,.
-  build-depends:      base              >= 4.5 && < 5
-                    , hspec             >= 1.7.2 && < 1.9
-                    , HUnit             >= 1.2.5.2 && < 1.3
+  build-depends:      base   >= 4.5 && < 4.8
+                    , hspec  >= 1.9 && < 1.10
+                    , HUnit  >= 1.2.5.2 && < 1.3
   default-language:   Haskell2010
 
  
