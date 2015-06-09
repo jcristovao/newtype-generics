@@ -24,11 +24,12 @@ instances for the power of this library.
 For example, see @ala Cont traverse@, with the proper 'Newtype' instance for Cont.
 You can easily define new instances for your newtypes with the help of GHC.Generics
 
- > {—# LANGUAGE DeriveGeneric #—}
+ > {-# LANGUAGE DeriveGeneric #-}
  > import GHC.Generics
  >
  > (...)
- > newtype Example = Example Int {deriving Generic)
+ > newtype Example = Example Int 
+ >   deriving (Generic)
  >
  > instance Newtype Example
  >
