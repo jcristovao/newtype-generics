@@ -148,13 +148,13 @@ over :: (Newtype n,  Newtype n', o' ~ O n', o ~ O n)
 over _ f = pack . f . unpack
 
 -- | 'under' lifted into a Functor.
-underF :: (Newtype n, Newtype n', o' ~ O n', o ~ O n, Functor f)
-       => (o -> n) -> (f n -> f n') -> (f o -> f o')
+underF :: (Newtype n, Newtype n', o' ~ O n', o ~ O n, Functor f, Functor g)
+       => (o -> n) -> (f n -> g n') -> (f o -> g o')
 underF _ f = fmap unpack . f . fmap pack
 
 -- | 'over' lifted into a Functor.
-overF :: (Newtype n, Newtype n', o' ~ O n', o ~ O n, Functor f)
-      => (o -> n) -> (f o -> f o') -> (f n -> f n')
+overF :: (Newtype n, Newtype n', o' ~ O n', o ~ O n, Functor f, Functor g)
+      => (o -> n) -> (f o -> g o') -> (f n -> g n')
 overF _ f = fmap pack . f . fmap unpack
 
 instance Newtype All where
