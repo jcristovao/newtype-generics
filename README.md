@@ -1,6 +1,9 @@
 newtype-generics
 ================
 
+[![Build Status](http://img.shields.io/travis/joyent/node.svg)](https://travis-ci.org/jcristovao/newtype-generics)
+[![Hackage](http://img.shields.io/hackage/v/newtype-generics.svg)](https://hackage.haskell.org/package/newtype-generics)
+
 A typeclass and set of functions for working with newtypes.
 Fork of the code published by Darius Jahandarie [here](http://hackage.haskell.org/package/newtype-0.2),
 with the addition of generics.
