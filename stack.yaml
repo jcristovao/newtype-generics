@@ -1,0 +1,8 @@
+resolver: lts-7.16
+packages:
+- '.'
+extra-deps:
+- hspec-2.4.0
+- hspec-core-2.4.0
+- hspec-discover-2.4.0
+- hspec-expectations-0.8.2
