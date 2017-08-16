@@ -47,9 +47,15 @@ module Control.Newtype
   , overF
   ) where
 
-import Data.Monoid
 import Control.Applicative
 import Control.Arrow
+import Data.Functor.Compose
+import Data.Functor.Identity
+import Data.Fixed
+import Data.Monoid
+import Data.Ord
+import qualified Data.Semigroup
+import Data.Semigroup (Min(..), Max(..), WrappedMonoid(..), Option(..))
 import GHC.Generics
 {-import Generics.Deriving-}
 
@@ -157,6 +163,79 @@ overF :: (Newtype n, Newtype n', o' ~ O n', o ~ O n, Functor f, Functor g)
       => (o -> n) -> (f o -> g o') -> (f n -> g n')
 overF _ f = fmap pack . f . fmap unpack
 
+-- Instances from Control.Applicative
+
+instance Newtype (WrappedMonad m a) where
+  type O (WrappedMonad m a) = m a
+  pack = WrapMonad
+  unpack (WrapMonad a) = a
+
+instance Newtype (WrappedArrow a b c) where
+  type O (WrappedArrow a b c) = a b c
+  pack = WrapArrow
+  unpack (WrapArrow a) = a
+
+instance Newtype (ZipList a) where
+  type O (ZipList a) = [a]
+  pack = ZipList
+  unpack (ZipList a) = a
+
+-- Instances from Control.Arrow
+
+instance Newtype (Kleisli m a b) where
+  type O (Kleisli m a b) = a -> m b
+  pack = Kleisli
+  unpack (Kleisli a) = a
+
+instance Newtype (ArrowMonad a b) where
+  type O (ArrowMonad a b) = a () b
+  pack = ArrowMonad
+  unpack (ArrowMonad a) = a
+
+-- Instances from Data.Fixed
+
+-- | @since 0.6
+instance Newtype (Fixed a) where
+  type O (Fixed a) = Integer
+  pack = MkFixed
+  unpack (MkFixed x) = x
+
+-- Instances from Data.Functor.Compose
+
+-- | @since 0.6
+instance Newtype (Compose f g a) where
+  type O (Compose f g a) = f (g a)
+  pack = Compose
+  unpack (Compose x) = x
+
+-- Instances from Data.Functor.Const
+
+instance Newtype (Const a x) where
+  type O (Const a x) = a
+  pack = Const
+  unpack (Const a) = a
+
+-- Instances from Data.Functor.Identity
+
+-- | @since 0.6
+instance Newtype (Identity a) where
+  type O (Identity a) = a
+  pack = Identity
+  unpack (Identity a) = a
+
+-- Instances from Data.Monoid
+
+-- | @since 0.6
+instance Newtype (Dual a) where
+  type O (Dual a) = a
+  pack = Dual
+  unpack (Dual a) = a
+
+instance Newtype (Endo a) where
+  type O (Endo a) = (a -> a)
+  pack = Endo
+  unpack (Endo a) = a
+
 instance Newtype All where
   type O All = Bool
   pack = All
@@ -187,40 +266,54 @@ instance Newtype (Last a) where
   pack = Last
   unpack (Last a) = a
 
-instance Newtype (Endo a) where
-  type O (Endo a) = (a -> a)
-  pack = Endo
-  unpack (Endo a) = a
+-- | @since 0.6
+instance Newtype (Alt f a) where
+  type O (Alt f a) = f a
+  pack = Alt
+  unpack (Alt x) = x
 
-instance Newtype (ZipList a) where
-  type O (ZipList a) = [a]
-  pack = ZipList
-  unpack (ZipList a) = a
+-- Instances from Data.Ord
 
-instance Newtype (Const a x) where
-  type O (Const a x) = a
-  pack = Const
-  unpack (Const a) = a
+-- | @since 0.6
+instance Newtype (Down a) where
+  type O (Down a) = a
+  pack = Down
+  unpack (Down a) = a
 
-instance Newtype (Kleisli m a b) where
-  type O (Kleisli m a b) = a -> m b
-  pack = Kleisli
-  unpack (Kleisli a) = a
+-- Instances from Data.Semigroup
 
-instance Newtype (WrappedMonad m a) where
-  type O (WrappedMonad m a) = m a
-  pack = WrapMonad
-  unpack (WrapMonad a) = a
+-- | @since 0.6
+instance Newtype (Min a) where
+  type O (Min a) = a
+  pack = Min
+  unpack (Min a) = a
 
-instance Newtype (WrappedArrow a b c) where
-  type O (WrappedArrow a b c) = a b c
-  pack = WrapArrow
-  unpack (WrapArrow a) = a
+-- | @since 0.6
+instance Newtype (Max a) where
+  type O (Max a) = a
+  pack = Max
+  unpack (Max a) = a
 
-instance Newtype (ArrowMonad a b) where
-  type O (ArrowMonad a b) = a () b
-  pack = ArrowMonad
-  unpack (ArrowMonad a) = a
+-- | @since 0.6
+instance Newtype (Data.Semigroup.First a) where
+  type O (Data.Semigroup.First a) = a
+  pack = Data.Semigroup.First
+  unpack (Data.Semigroup.First a) = a
 
+-- | @since 0.6
+instance Newtype (Data.Semigroup.Last a) where
+  type O (Data.Semigroup.Last a) = a
+  pack = Data.Semigroup.Last
+  unpack (Data.Semigroup.Last a) = a
 
+-- | @since 0.6
+instance Newtype (WrappedMonoid m) where
+  type O (WrappedMonoid m) = m
+  pack = WrapMonoid
+  unpack (WrapMonoid m) = m
 
+-- | @since 0.6
+instance Newtype (Option a) where
+  type O (Option a) = Maybe a
+  pack = Option
+  unpack (Option x) = x
