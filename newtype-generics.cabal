@@ -1,5 +1,5 @@
 Name:                newtype-generics
-Version:             0.5
+Version:             0.5.0.1
 Synopsis:            A typeclass and set of functions for working with newtypes, with generics support.
 Description:         Per Conor McBride, the Newtype typeclass represents the packing and unpacking of a newtype,
                      and allows you to operatate under that newtype with functions such as ala.
@@ -12,7 +12,7 @@ Maintainer:          Simon Jakobi <simon.jakobi@gmail.com>
 -- Copyright:           
 Category:            Control
 Build-type:          Simple
--- Extra-source-files:  
+Extra-source-files:  CHANGELOG.md, README.md
 Cabal-version:       >=1.10
 Tested-with:
   GHC==8.2.1,
