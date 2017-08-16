@@ -8,7 +8,7 @@ Description:         Per Conor McBride, the Newtype typeclass represents the pac
 License:             BSD3
 License-file:        LICENSE
 Author:              Darius Jahandarie, Conor McBride, João Cristóvão
-Maintainer:          João Cristóvão <jmacristovao@gmail.com>
+Maintainer:          Simon Jakobi <simon.jakobi@gmail.com>
 -- Copyright:           
 Category:            Control
 Build-type:          Simple
