@@ -52,7 +52,9 @@ import Control.Applicative
 import Control.Arrow
 import Data.Functor.Compose
 import Data.Functor.Identity
+#if MIN_VERSION_base(4,7,0)
 import Data.Fixed
+#endif
 import Data.Monoid
 import Data.Ord
 #if MIN_VERSION_base(4,9,0)
@@ -195,6 +197,7 @@ instance Newtype (ArrowMonad a b) where
   pack = ArrowMonad
   unpack (ArrowMonad a) = a
 
+#if MIN_VERSION_base(4,7,0)
 -- Instances from Data.Fixed
 
 -- | @since 0.6
@@ -202,6 +205,7 @@ instance Newtype (Fixed a) where
   type O (Fixed a) = Integer
   pack = MkFixed
   unpack (MkFixed x) = x
+#endif
 
 -- Instances from Data.Functor.Compose
 
