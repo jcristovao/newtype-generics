@@ -1,4 +1,5 @@
 {-# LANGUAGE MultiParamTypeClasses, FlexibleInstances, TypeFamilies #-}
+{-# LANGUAGE CPP                        #-}
 {-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE DefaultSignatures          #-}
 {-# LANGUAGE FlexibleContexts           #-}
@@ -54,8 +55,10 @@ import Data.Functor.Identity
 import Data.Fixed
 import Data.Monoid
 import Data.Ord
+#if MIN_VERSION_base(4,9,0)
 import qualified Data.Semigroup
 import Data.Semigroup (Min(..), Max(..), WrappedMonoid(..), Option(..))
+#endif
 import GHC.Generics
 {-import Generics.Deriving-}
 
@@ -280,6 +283,8 @@ instance Newtype (Down a) where
   pack = Down
   unpack (Down a) = a
 
+
+#if MIN_VERSION_base(4,9,0)
 -- Instances from Data.Semigroup
 
 -- | @since 0.6
@@ -317,3 +322,4 @@ instance Newtype (Option a) where
   type O (Option a) = Maybe a
   pack = Option
   unpack (Option x) = x
+#endif
