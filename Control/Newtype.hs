@@ -273,11 +273,13 @@ instance Newtype (Last a) where
   pack = Last
   unpack (Last a) = a
 
+#if MIN_VERSION_base(4,8,0)
 -- | @since 0.6
 instance Newtype (Alt f a) where
   type O (Alt f a) = f a
   pack = Alt
   unpack (Alt x) = x
+#endif
 
 -- Instances from Data.Ord
 
