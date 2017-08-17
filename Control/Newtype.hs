@@ -200,7 +200,7 @@ instance Newtype (ArrowMonad a b) where
 #if MIN_VERSION_base(4,7,0)
 -- Instances from Data.Fixed
 
--- | @since 0.6
+-- | @since 0.5.1
 instance Newtype (Fixed a) where
   type O (Fixed a) = Integer
   pack = MkFixed
@@ -209,7 +209,7 @@ instance Newtype (Fixed a) where
 
 -- Instances from Data.Functor.Compose
 
--- | @since 0.6
+-- | @since 0.5.1
 instance Newtype (Compose f g a) where
   type O (Compose f g a) = f (g a)
   pack = Compose
@@ -224,7 +224,7 @@ instance Newtype (Const a x) where
 
 -- Instances from Data.Functor.Identity
 
--- | @since 0.6
+-- | @since 0.5.1
 instance Newtype (Identity a) where
   type O (Identity a) = a
   pack = Identity
@@ -232,7 +232,7 @@ instance Newtype (Identity a) where
 
 -- Instances from Data.Monoid
 
--- | @since 0.6
+-- | @since 0.5.1
 instance Newtype (Dual a) where
   type O (Dual a) = a
   pack = Dual
@@ -274,7 +274,7 @@ instance Newtype (Last a) where
   unpack (Last a) = a
 
 #if MIN_VERSION_base(4,8,0)
--- | @since 0.6
+-- | @since 0.5.1
 instance Newtype (Alt f a) where
   type O (Alt f a) = f a
   pack = Alt
@@ -283,7 +283,7 @@ instance Newtype (Alt f a) where
 
 -- Instances from Data.Ord
 
--- | @since 0.6
+-- | @since 0.5.1
 instance Newtype (Down a) where
   type O (Down a) = a
   pack = Down
@@ -293,37 +293,37 @@ instance Newtype (Down a) where
 #if MIN_VERSION_base(4,9,0)
 -- Instances from Data.Semigroup
 
--- | @since 0.6
+-- | @since 0.5.1
 instance Newtype (Min a) where
   type O (Min a) = a
   pack = Min
   unpack (Min a) = a
 
--- | @since 0.6
+-- | @since 0.5.1
 instance Newtype (Max a) where
   type O (Max a) = a
   pack = Max
   unpack (Max a) = a
 
--- | @since 0.6
+-- | @since 0.5.1
 instance Newtype (Data.Semigroup.First a) where
   type O (Data.Semigroup.First a) = a
   pack = Data.Semigroup.First
   unpack (Data.Semigroup.First a) = a
 
--- | @since 0.6
+-- | @since 0.5.1
 instance Newtype (Data.Semigroup.Last a) where
   type O (Data.Semigroup.Last a) = a
   pack = Data.Semigroup.Last
   unpack (Data.Semigroup.Last a) = a
 
--- | @since 0.6
+-- | @since 0.5.1
 instance Newtype (WrappedMonoid m) where
   type O (WrappedMonoid m) = m
   pack = WrapMonoid
   unpack (WrapMonoid m) = m
 
--- | @since 0.6
+-- | @since 0.5.1
 instance Newtype (Option a) where
   type O (Option a) = Maybe a
   pack = Option
