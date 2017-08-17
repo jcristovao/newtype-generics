@@ -24,6 +24,7 @@ Tested-with:
 Library
   Exposed-modules:     Control.Newtype
   Build-depends:       base >= 4.6 && < 4.11
+                     , transformers
   -- Other-modules:       
   -- Build-tools:         
   Ghc-options: -Wall
