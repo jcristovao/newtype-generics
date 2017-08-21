@@ -116,6 +116,9 @@ class Newtype n where
 -- 2. Showing that the first parameter is /completely ignored/ on the value level,
 --    meaning the only reason you pass in the constructor is to provide type
 --    information.  Typeclasses sure are neat.
+--
+-- >>> op Identity (Identity 3)
+-- 3
 op :: (Newtype n,o ~ O n ) => (o -> n) -> n -> o
 op _ = unpack
 
@@ -131,6 +134,9 @@ op _ = unpack
 -- The solution utilized here is to just hand off the \"packer\" to the hof.
 -- That way your structure can be imposed in the hof,
 -- whatever you may want it to be (e.g., List, Traversable).
+--
+-- >>> ala Sum foldMap [1,2,3,4]
+-- 10
 ala :: (Newtype n, Newtype n', o' ~ O n', o ~ O n)
     => (o -> n) -> ((o -> n) -> b -> n') -> (b -> o')
 ala pa hof = ala' pa hof id
@@ -142,12 +148,21 @@ ala pa hof = ala' pa hof id
 -- passes @id@ as the final parameter by default.
 -- If you want the convenience of being able to hook right into the hof,
 -- you may use this function.
+--
+-- >>> ala' Sum foldMap length ["hello", "world"]
+-- 10
+--
+-- >>> ala' First foldMap (readMaybe @Int) ["x", "42", "1"]
+-- Just 42
 ala' :: (Newtype n, Newtype n', o' ~ O n', o ~ O n)
      => (o -> n) -> ((a -> n) -> b -> n') -> (a -> o) -> (b -> o')
 ala' _ hof f = unpack . hof (pack . f)
 
 -- | A very simple operation involving running the function \'under\' the newtype.
 -- Suffers from the problems mentioned in the 'ala' function's documentation.
+--
+-- >>> under (MkFixed @E3) (+2) 1
+-- 2001
 under :: (Newtype n, Newtype n', o' ~ O n', o ~ O n)
       => (o -> n) -> (n -> n') -> (o -> o')
 under _ f = unpack . f . pack
