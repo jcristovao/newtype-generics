@@ -42,6 +42,9 @@ mySumOldschool xs = s
 mySumCoerce :: [Int] -> Int
 mySumCoerce xs = coerce (foldMap coerce xs :: MySumDerive)
 
+mySumCoerce' :: [Int] -> Int
+mySumCoerce' xs = coerce (mconcat (coerce xs) :: MySumDerive)
+
 preludeSum :: [Int] -> Int
 preludeSum xs = sum xs
 
@@ -56,6 +59,7 @@ main = defaultMain [
             , bench' "manual wrap & unwrap" mySumOldschool
             , bench' "coerce" mySumCoerce
             ]
+        , bench' "coerce . mconcat . coerce" mySumCoerce'
         , bench' "Prelude.sum" preludeSum
         ]
   ]
