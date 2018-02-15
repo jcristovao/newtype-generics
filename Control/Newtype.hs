@@ -163,8 +163,8 @@ ala' _ hof f = unpack . hof (pack . f)
 -- | A very simple operation involving running the function \'under\' the newtype.
 -- Suffers from the problems mentioned in the 'ala' function's documentation.
 --
--- >>> under (MkFixed @E3) (+2) 1
--- 2001
+-- >>> under Product (stimes 3) 3
+-- 27
 under :: (Newtype n, Newtype n', o' ~ O n', o ~ O n)
       => (o -> n) -> (n -> n') -> (o -> o')
 under _ f = unpack . f . pack
