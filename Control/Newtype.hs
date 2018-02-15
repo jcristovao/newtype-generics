@@ -44,6 +44,8 @@ module Control.Newtype
   , ala'
   , under
   , over
+  , under2
+  , over2
   , underF
   , overF
   ) where
@@ -172,6 +174,19 @@ under _ f = unpack . f . pack
 over :: (Newtype n,  Newtype n', o' ~ O n', o ~ O n)
      => (o -> n) -> (o -> o') -> (n -> n')
 over _ f = pack . f . unpack
+
+-- | Lower a binary function to operate on wrapped values.
+--
+-- >>> under2 Any (<>) True False
+-- True
+under2 :: (Newtype n, Newtype n', o' ~ O n', o ~ O n)
+       => (o -> n) -> (n -> n -> n') -> (o -> o -> o')
+under2 _ f o0 o1 = unpack $ f (pack o0) (pack o1)
+
+-- | The opposite of 'under2'.
+over2 :: (Newtype n, Newtype n', o' ~ O n', o ~ O n)
+       => (o -> n) -> (o -> o -> o') -> (n -> n -> n')
+over2 _ f n0 n1 = pack $ f (unpack n0) (unpack n1)
 
 -- | 'under' lifted into a Functor.
 underF :: (Newtype n, Newtype n', o' ~ O n', o ~ O n, Functor f, Functor g)
