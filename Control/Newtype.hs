@@ -6,16 +6,20 @@
 {-# LANGUAGE StandaloneDeriving         #-}
 {-# LANGUAGE UndecidableInstances       #-}
 {- |
-The 'Newtype' typeclass and related functions: 'op', 'ala', 'ala'', 'under'.
+The 'Newtype' typeclass and related functions.
 Primarly pulled from Conor McBride's Epigram work. Some examples:
 
-@ala Sum foldMap [1,2,3,4] -- foldMaps the list ala the Sum newtype. This results in 10.@
+>>> ala Sum foldMap [1,2,3,4]
+10
 
-@ala Product foldMap [1,2,3,4] -- foldMaps the list ala the Product newtype. This results in 24.@
+>>> ala Endo foldMap [(+1), (+2), (subtract 1), (*2)] 3
+8
 
-@ala Endo foldMap [(+1), (+2), (subtract 1), (*2)] 3 -- foldMaps the list ala the Endo newtype. This results in 8.@
+>>> under2 Min (<>) 2 1
+1
 
-NB: 'Data.Foldable.foldMap' is a generalized @mconcatMap@ which is a generalized @concatMap@.
+>>> over All not (All False)
+All {getAll = True)
 
 This package includes 'Newtype' instances for all the (non-GHC\/foreign)
 newtypes in base (as seen in the examples).
@@ -171,11 +175,14 @@ under _ f = unpack . f . pack
 
 -- | The opposite of 'under'. I.e., take a function which works on the
 -- underlying types, and switch it to a function that works on the newtypes.
+--
+-- >>> over All not (All False)
+-- All {getAll = True}
 over :: (Newtype n,  Newtype n', o' ~ O n', o ~ O n)
      => (o -> n) -> (o -> o') -> (n -> n')
 over _ f = pack . f . unpack
 
--- | Lower a binary function to operate on wrapped values.
+-- | Lower a binary function to operate on the underlying values.
 --
 -- >>> under2 Any (<>) True False
 -- True
