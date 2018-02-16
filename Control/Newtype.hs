@@ -7,7 +7,7 @@
 {-# LANGUAGE UndecidableInstances       #-}
 {- |
 The 'Newtype' typeclass and related functions.
-Primarly pulled from Conor McBride's Epigram work. Some examples:
+Primarily pulled from Conor McBride's Epigram work. Some examples:
 
 >>> ala Sum foldMap [1,2,3,4]
 10
