@@ -186,11 +186,15 @@ over _ f = pack . f . unpack
 --
 -- >>> under2 Any (<>) True False
 -- True
+--
+-- @since 0.5.2
 under2 :: (Newtype n, Newtype n', o' ~ O n', o ~ O n)
        => (o -> n) -> (n -> n -> n') -> (o -> o -> o')
 under2 _ f o0 o1 = unpack $ f (pack o0) (pack o1)
 
 -- | The opposite of 'under2'.
+--
+-- @since 0.5.2
 over2 :: (Newtype n, Newtype n', o' ~ O n', o ~ O n)
        => (o -> n) -> (o -> o -> o') -> (n -> n -> n')
 over2 _ f n0 n1 = pack $ f (unpack n0) (unpack n1)
