@@ -50,3 +50,9 @@ spec = describe "Newtype test" $ do
     over Sum     (+1) (Sum     four) `shouldBe` Sum five
     over Product (+1) (Product four) `shouldBe` Product five
 
+  it "under2" $ do
+    under2 Sum (<>) four five `shouldBe` 9
+
+  it "over2" $ do
+    over2 TestNewType (+) (TestNewType four) (TestNewType five) `shouldBe` TestNewType 9
+
