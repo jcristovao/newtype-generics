@@ -128,18 +128,19 @@ class Newtype n where
 op :: (Newtype n,o ~ O n ) => (o -> n) -> n -> o
 op _ = unpack
 
--- | The workhorse of the package. Given a pack and a \"higher order function\",
+-- | The workhorse of the package. Given a "packer" and a \"higher order function\" (/hof/),
 -- it handles the packing and unpacking, and just sends you back a regular old
--- function, with the type varying based on the hof you passed.
+-- function, with the type varying based on the /hof/ you passed.
 --
--- The reason for the signature of the hof is due to 'ala' not caring about structure.
--- To illustrate why this is important, another function in this package is 'under'.
--- It is not extremely useful; @under2@ might be more useful (with e.g., @mappend@),
--- but then we already digging the trench of
--- \"What about @under3@? @under4@?\".
--- The solution utilized here is to just hand off the \"packer\" to the hof.
--- That way your structure can be imposed in the hof,
--- whatever you may want it to be (e.g., List, Traversable).
+-- The reason for the signature of the /hof/ is due to 'ala' not caring about structure.
+-- To illustrate why this is important, consider this alternative implementation of 'under2':
+--
+-- > under2 :: (Newtype n, Newtype n', o' ~ O n', o ~ O n)
+-- >        => (o -> n) -> (n -> n -> n') -> (o -> o -> o')
+-- > under2' pa f o0 o1 = ala pa (\p -> uncurry f . bimap p p) (o0, o1)
+--
+-- Being handed the "packer", the /hof/ may apply it in any structure of its choosing –
+-- in this case a tuple.
 --
 -- >>> ala Sum foldMap [1,2,3,4]
 -- 10
@@ -165,7 +166,6 @@ ala' :: (Newtype n, Newtype n', o' ~ O n', o ~ O n)
 ala' _ hof f = unpack . hof (pack . f)
 
 -- | A very simple operation involving running the function \'under\' the newtype.
--- Suffers from the problems mentioned in the 'ala' function's documentation.
 --
 -- >>> under Product (stimes 3) 3
 -- 27
