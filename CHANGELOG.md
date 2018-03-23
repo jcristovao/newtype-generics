@@ -1,5 +1,10 @@
 # Changelog for `newtype-generics`
 
+## [Unreleased]
+- All code was moved to a new `Control.Newtype.Generics` module.
+- `Control.Newtype` re-exports `Control.Newtype.Generics`, but is deprecated
+  and will be removed in the next major release.
+
 ## [0.5.2.2] – 2018-03-16
 - Adjust bounds for `base` and `transformers`
 

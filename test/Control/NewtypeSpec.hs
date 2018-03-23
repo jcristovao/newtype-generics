@@ -9,7 +9,7 @@ module Control.NewtypeSpec where
 import Prelude
 
 import Data.Monoid
-import Control.Newtype
+import Control.Newtype.Generics
 import GHC.Generics
 
 import Test.Hspec

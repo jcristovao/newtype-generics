@@ -4,7 +4,7 @@ module Main where
 
 import Criterion
 import Criterion.Main
-import Control.Newtype
+import Control.Newtype.Generics
 import Data.Coerce
 import Data.Semigroup
 import GHC.Generics

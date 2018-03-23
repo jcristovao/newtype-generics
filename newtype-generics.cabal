@@ -22,6 +22,7 @@ Tested-with:
 
 Library
   Exposed-modules:     Control.Newtype
+                     , Control.Newtype.Generics
   Build-depends:       base >= 4.6 && < 4.13
                      , transformers < 0.6
   Ghc-options: -Wall
