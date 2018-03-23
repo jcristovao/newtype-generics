@@ -6,6 +6,7 @@ import Criterion
 import Criterion.Main
 import Control.Newtype.Generics
 import Data.Coerce
+import Data.Foldable (foldMap)
 import Data.Semigroup
 import GHC.Generics
 
