@@ -9,6 +9,7 @@ License:             BSD3
 License-file:        LICENSE
 Author:              Darius Jahandarie, Conor McBride, João Cristóvão, Simon Jakobi
 Maintainer:          Simon Jakobi <simon.jakobi@gmail.com>
+Homepage:            http://github.com/sjakobi/bsb-http-chunked
 Category:            Control
 Build-type:          Simple
 Extra-source-files:  CHANGELOG.md, README.md
@@ -31,7 +32,7 @@ Library
 
 source-repository head
   type: git
-  location: https://github.com/jcristovao/newtype-generics
+  location: https://github.com/sjakobi/newtype-generics
 
 test-suite test
   type:               exitcode-stdio-1.0
