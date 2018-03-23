@@ -12,7 +12,7 @@ Maintainer:          Simon Jakobi <simon.jakobi@gmail.com>
 Homepage:            http://github.com/sjakobi/bsb-http-chunked
 Category:            Control
 Build-type:          Simple
-Extra-source-files:  CHANGELOG.md, README.md
+Extra-source-files:  CHANGELOG.md
 Cabal-version:       >=1.10
 Tested-with:
   GHC==8.4.1,
