@@ -9,7 +9,7 @@ License:             BSD3
 License-file:        LICENSE
 Author:              Darius Jahandarie, Conor McBride, João Cristóvão, Simon Jakobi
 Maintainer:          Simon Jakobi <simon.jakobi@gmail.com>
-Homepage:            http://github.com/sjakobi/bsb-http-chunked
+Homepage:            http://github.com/sjakobi/newtype-generics
 Category:            Control
 Build-type:          Simple
 Extra-source-files:  CHANGELOG.md
