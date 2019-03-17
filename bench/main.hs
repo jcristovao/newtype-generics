@@ -2,8 +2,7 @@
 {-# language TypeFamilies #-}
 module Main where
 
-import Criterion
-import Criterion.Main
+import Gauge
 import Control.Newtype.Generics
 import Data.Coerce
 import Data.Foldable (foldMap)

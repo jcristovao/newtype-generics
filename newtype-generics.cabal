@@ -51,7 +51,7 @@ benchmark bench
   main-is:            main.hs
   hs-source-dirs:     bench
   build-depends:      base >= 4.7
-                    , criterion
+                    , gauge
                     , newtype-generics
                     , semigroups
   ghc-options:        -O2
