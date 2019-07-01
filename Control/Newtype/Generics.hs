@@ -324,6 +324,14 @@ instance Newtype (Alt f a) where
   unpack (Alt x) = x
 #endif
 
+#if MIN_VERSION_base(4,12,0)
+-- | @since Unreleased
+instance Newtype (Ap f a) where
+  type O (Ap f a) = f a
+  pack = Ap
+  unpack = getAp
+#endif
+
 -- Instances from Data.Ord
 
 -- | @since 0.5.1

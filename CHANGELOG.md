@@ -1,5 +1,8 @@
 # Changelog for `newtype-generics`
 
+## [Unreleased]
+- Add `Newtype` instance for `Data.Monoid.Ap`.
+
 ## [0.5.3] – 2018-03-23
 - All code was moved to a new `Control.Newtype.Generics` module.
 - `Control.Newtype` re-exports `Control.Newtype.Generics`, but is deprecated
