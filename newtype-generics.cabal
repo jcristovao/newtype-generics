@@ -15,8 +15,8 @@ Build-type:          Simple
 Extra-source-files:  CHANGELOG.md
 Cabal-version:       >=1.10
 Tested-with:
-  GHC==8.6.4,
-  GHC==8.4.3,
+  GHC==8.6.5,
+  GHC==8.4.4,
   GHC==8.2.2,
   GHC==8.0.2,
   GHC==7.10.3,
