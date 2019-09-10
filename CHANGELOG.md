@@ -1,7 +1,8 @@
 # Changelog for `newtype-generics`
 
-## [Unreleased]
+## [0.5.4] – 2019-09-10
 - Add `Newtype` instance for `Data.Monoid.Ap`.
+- Support GHC-8.8.
 
 ## [0.5.3] – 2018-03-23
 - All code was moved to a new `Control.Newtype.Generics` module.
@@ -35,7 +36,8 @@
 - Relax types of `underF` and `overF` to allow different input & output functors
 
 
-[Unreleased]: https://github.com/sjakobi/newtype-generics/compare/v0.5.3...HEAD
+[Unreleased]: https://github.com/sjakobi/newtype-generics/compare/v0.5.4...HEAD
+[0.5.4]: https://github.com/sjakobi/newtype-generics/compare/v0.5.3...v0.5.4
 [0.5.3]: https://github.com/sjakobi/newtype-generics/compare/v0.5.2.2...v0.5.3
 [0.5.2.2]: https://github.com/sjakobi/newtype-generics/compare/v0.5.2.1...v0.5.2.2
 [0.5.2.1]: https://github.com/sjakobi/newtype-generics/compare/v0.5.2...v0.5.2.1
