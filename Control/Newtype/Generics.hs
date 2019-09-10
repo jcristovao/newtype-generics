@@ -325,7 +325,7 @@ instance Newtype (Alt f a) where
 #endif
 
 #if MIN_VERSION_base(4,12,0)
--- | @since Unreleased
+-- | @since 0.5.4
 instance Newtype (Ap f a) where
   type O (Ap f a) = f a
   pack = Ap
