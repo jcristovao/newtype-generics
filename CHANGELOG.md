@@ -1,7 +1,8 @@
 # Changelog for `newtype-generics`
 
-## [0.6]
+## [0.6] – 2021-02-04
 - Remove the deprecated `Control.Newtype` module.
+- Support GHC-9.0
 
 ## [0.5.4] – 2019-09-10
 - Add `Newtype` instance for `Data.Monoid.Ap`.
