@@ -60,15 +60,12 @@ import Control.Applicative
 import Control.Arrow
 import Data.Functor.Compose
 import Data.Functor.Identity
-#if MIN_VERSION_base(4,7,0)
 import Data.Fixed
-#endif
+import Data.Kind (Type)
 import Data.Monoid
 import Data.Ord
-#if MIN_VERSION_base(4,9,0)
 import qualified Data.Semigroup
 import Data.Semigroup (Min(..), Max(..), WrappedMonoid(..), Option(..))
-#endif
 import GHC.Generics
 {-import Generics.Deriving-}
 
@@ -84,7 +81,7 @@ import GHC.Generics
 
 -- Generic Newtype
 class GNewtype n where
-  type GO n :: *
+  type GO n :: Type
   gpack   :: GO n -> n p
   gunpack :: n p  -> GO n
 
@@ -105,7 +102,7 @@ instance GNewtype (D1 d (C1 c (S1 s (K1 i a)))) where
 -- | As long as the type @n@ is an instance of Generic, you can create an instance
 -- with just @instance Newtype n@
 class Newtype n where
-  type O n :: *
+  type O n :: Type
   type O n = GO (Rep n)
 
   pack   :: O n -> n
@@ -240,7 +237,6 @@ instance Newtype (ArrowMonad a b) where
   pack = ArrowMonad
   unpack (ArrowMonad a) = a
 
-#if MIN_VERSION_base(4,7,0)
 -- Instances from Data.Fixed
 
 -- | @since 0.5.1
@@ -248,7 +244,6 @@ instance Newtype (Fixed a) where
   type O (Fixed a) = Integer
   pack = MkFixed
   unpack (MkFixed x) = x
-#endif
 
 -- Instances from Data.Functor.Compose
 
@@ -316,13 +311,11 @@ instance Newtype (Last a) where
   pack = Last
   unpack (Last a) = a
 
-#if MIN_VERSION_base(4,8,0)
 -- | @since 0.5.1
 instance Newtype (Alt f a) where
   type O (Alt f a) = f a
   pack = Alt
   unpack (Alt x) = x
-#endif
 
 #if MIN_VERSION_base(4,12,0)
 -- | @since 0.5.4
@@ -341,7 +334,6 @@ instance Newtype (Down a) where
   unpack (Down a) = a
 
 
-#if MIN_VERSION_base(4,9,0)
 -- Instances from Data.Semigroup
 
 -- | @since 0.5.1
@@ -379,4 +371,3 @@ instance Newtype (Option a) where
   type O (Option a) = Maybe a
   pack = Option
   unpack (Option x) = x
-#endif
