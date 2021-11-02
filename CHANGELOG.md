@@ -1,5 +1,8 @@
 # Changelog for `newtype-generics`
 
+## [0.6.1] – 2021-11-02
+- Support GHC-9.2
+
 ## [0.6] – 2021-02-04
 - Remove the deprecated `Control.Newtype` module.
 - Support GHC-9.0
@@ -41,6 +44,7 @@
 
 
 [Unreleased]: https://github.com/sjakobi/newtype-generics/compare/v0.6...HEAD
+[0.6.1]: https://github.com/sjakobi/newtype-generics/compare/v0.6...v0.6.1
 [0.6]: https://github.com/sjakobi/newtype-generics/compare/v0.5.4...v0.6
 [0.5.4]: https://github.com/sjakobi/newtype-generics/compare/v0.5.3...v0.5.4
 [0.5.3]: https://github.com/sjakobi/newtype-generics/compare/v0.5.2.2...v0.5.3
