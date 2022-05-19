@@ -27,7 +27,6 @@ Tested-with:
 Library
   Exposed-modules:     Control.Newtype.Generics
   Build-depends:       base >= 4.9 && < 4.17
-                     , transformers < 0.6
   Ghc-options: -Wall
   default-language:   Haskell2010
 
